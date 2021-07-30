@@ -19,6 +19,14 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
+app.get("/api/whoami", (req, res) => {
+  const ipaddress = req.ip;
+  const header = req.headers;
+  const language = header["accept-language"];
+  const software = header["user-agent"];
+
+  res.json({ ipaddress, language, software });
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT ?? 3000, function () {
